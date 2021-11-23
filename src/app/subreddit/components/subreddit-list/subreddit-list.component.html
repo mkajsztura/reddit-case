@@ -1,0 +1,54 @@
+<div class="wrapper">
+  <h1>Subreddit listing</h1>
+  <div *ngIf="isError">
+    There was an error while fetching subreddits. Try to refresh the page.
+  </div>
+  <div *ngIf="isLoading">
+    <app-loader></app-loader>
+  </div>
+  <ng-container *ngIf="paginationList$ | async as list">
+    <div class="list">
+      <ng-container *ngIf="list.children.length; else noItems">
+        <div
+          class="list__item"
+          *ngFor="let item of list.children; let i = index"
+          (click)="goToItem(item.data)"
+        >
+          <app-subreddit-list-item
+            [subreddit]="item.data"
+          ></app-subreddit-list-item>
+        </div>
+      </ng-container>
+      <ng-template #noItems>
+        You have come to the place where the pizza ends. Todo fix me.
+      </ng-template>
+    </div>
+    <div class="pagination">
+      <button
+        [disabled]="!list.after"
+        class="pagination__btn"
+        (click)="!!list.after && prevPage(list)"
+      >
+        PREVIUOS
+      </button>
+      <button
+        [disabled]="!list.before"
+        class="pagination__btn"
+        (click)="nextPage(list)"
+      >
+        NEXT
+      </button>
+    </div>
+    <div class="pagination">
+      <button
+        *ngFor="let size of limitOptions"
+        [disabled]="size === limit"
+        class="pagination__btn"
+        [class.pagination__btn--active]="size === limit"
+        (click)="changeSize(size)"
+      >
+        {{ size }}
+      </button>
+    </div>
+  </ng-container>
+</div>

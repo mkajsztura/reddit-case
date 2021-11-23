@@ -1,0 +1,27 @@
+<div class="subreddit">
+  <div class="subreddit__img">
+    <img
+      *ngIf="subreddit.thumbnail.includes('http'); else noThumbnail"
+      [src]="subreddit.thumbnail"
+      alt="subreddit thumbnail"
+    />
+    <ng-template #noThumbnail>
+      <span class="info"> Thumbnail missing </span>
+    </ng-template>
+  </div>
+  <div class="subreddit__data">
+    <div class="subreddit__title">
+      {{ subreddit.title }} by {{ subreddit.author }}
+    </div>
+    <div class="">[{{ subreddit.created * 1000 | date: "medium" }}]</div>
+
+    <div>
+      SCORE:
+      {{ subreddit.score }}
+    </div>
+    <div>
+      COMMENTS
+      {{ subreddit.num_comments }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+$gray: gray;
+$darkgray: #474747;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5%;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+
+  &__btn {
+    margin: 10px;
+    color: white;
+    background-color: $gray;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    transition: ease-in 0.1s;
+    border: 1px solid white;
+
+    &:hover {
+      cursor: pointer;
+      color: $gray;
+      background-color: white;
+      border: 1px solid $gray;
+    }
+
+    &:disabled,
+    &--active {
+      background-color: $darkgray;
+      pointer-events: none;
+    }
+  }
+}
